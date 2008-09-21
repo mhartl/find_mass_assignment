@@ -17,7 +17,7 @@ Suppose line 17 of the Users controller is
 
     @user = User.new(params[:user])
 
-but the User model *doesn't* define attr_accessible.  Then we get the output
+but the User model *doesn't* define <tt>attr_accessible</tt>.  Then we get the output
 
     $ rake find_mass_assignment
 
