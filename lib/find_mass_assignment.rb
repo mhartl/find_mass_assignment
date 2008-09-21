@@ -46,6 +46,7 @@ class String
     end
   end
   
+  # Returnt true if a model does not define attr_accessible.
   def problem?
     not attr_accessible?
   end
@@ -65,10 +66,6 @@ class String
 end
 
 module MassAssignment
-
-  def self.problem_models(line)
-    line.mass_assignment_models.select { |model| model.problem? }
-  end
 
   def self.print_mass_assignment_problems(controller)
     lines = File.open(controller)
