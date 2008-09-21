@@ -18,7 +18,7 @@ but the User model *doesn't* define attr_accessible.  Then we get the output
 $ rake find_mass_assignment
 
 /path/to/app/controllers/users_controller.rb
-  17  @user = User.new(:params[:user])
+  17  @user = User.new(params[:user])
 
 This indicates that the User model has a likely mass assignment vulnerability.
 
