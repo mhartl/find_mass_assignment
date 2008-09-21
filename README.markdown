@@ -2,9 +2,9 @@
 
 ## A Rails plugin to find likely mass assignment vulnerabilities
 
-The <pre>find\_mass\_assignment</pre> Rake task defined by the plugin finds likely mass assignment problems in Rails projects.
+The <tt>find\_mass\_assignment</tt> Rake task defined by the plugin finds likely mass assignment problems in Rails projects.
 
-The method is to scan the controllers for likely mass assignment, and then find the corresponding models that *don't* have <pre>attr\_accessible</pre> defined.  Any time that happens, it's a potential problem.
+The method is to scan the controllers for likely mass assignment, and then find the corresponding models that *don't* have <tt>attr\_accessible</tt> defined.  Any time that happens, it's a potential problem.
 
 Install this plugin as follows:
 
