@@ -1,6 +1,6 @@
 require 'active_support'  
 
-# Find the models that have potential mass assignment problems.
+# Find potential mass assignment problems.
 # The method is to scan the controllers for likely mass assignment,
 # and then find the corresponding models that *don't* have 
 # attr_accessible defined.  Any time that happens, it's a potential problem.
