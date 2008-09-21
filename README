@@ -1,13 +1,25 @@
 FindMassAssignment
 ==================
 
-Introduction goes here.
+The find_mass_assignment Rake task finds likely mass assignment problems.
+
+The method is to scan the controllers for likely mass assignment, and then find the corresponding models that *don't* have attr_accessible defined.  Any time that happens, it's a potential problem.
 
 
 Example
 =======
 
-Example goes here.
+Suppose line 17 of Users controller is
 
+  @user = User.new(params[:user])
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+but the User model *doesn't* define attr_accessible.  Then we get the output
+
+$ rake find_mass_assignment
+
+/path/to/app/controllers/users_controller.rb
+  100  @user = User.new(:params[:user])
+
+This indicates that the User model has a likely mass assignment vulnerability.
+
+Copyright (c) 2008 Michael Hartl, released under the MIT license
