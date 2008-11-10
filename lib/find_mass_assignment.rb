@@ -61,7 +61,9 @@ class String
   #   (1) Has a likely mass assignment
   #   (2) The corresponding model doesn't define attr_accessible
   def mass_assignment_problem?
-    File.open(self).find { |l| l.mass_assignment? and l.problem_model? }
+    File.open(self).find do |line|
+      line.mass_assignment? and line.problem_model?
+    end
   end
 end
 
