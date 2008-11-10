@@ -46,7 +46,7 @@ class String
     end
   end
   
-  # Returnt true if a model does not define attr_accessible.
+  # Return true if a model does not define attr_accessible.
   def problem?
     not attr_accessible?
   end
