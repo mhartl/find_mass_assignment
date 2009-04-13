@@ -80,7 +80,7 @@ module MassAssignment
   end
 
   def self.find
-    controllers = Dir.glob("#{RAILS_ROOT}/app/controllers/*_controller.rb")
+    controllers = Dir.glob("#{RAILS_ROOT}/app/controllers/**/*_controller.rb")
     controllers.each do |controller|
       if controller.mass_assignment_problem?
         puts "\n#{controller}"
