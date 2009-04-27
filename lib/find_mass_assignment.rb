@@ -19,9 +19,10 @@ class String
   # The MASS_ASSIGNMENT regex returns, e.g., ['Post', 'new'] because of
   # the grouping methods; we want the first of the two for each match.
   # For example, the call to scan might return
-  #   [['Post', 'new'], ['Person', 'create']]
+  #   [['Post', 'new'], ['User', 'create']]
   # We then select the first element of each subarray, returning
-  #   ['Post', 'Person']
+  #   ['Post', 'User']
+  # Finally, we call classify to turn the string into a class.
   def mass_assignment_models
     scan(MASS_ASSIGNMENT).map { |problem| problem.first.classify }
   end
@@ -48,7 +49,7 @@ class String
   
   # Return true if a model does not define attr_accessible.
   def problem?
-    not attr_accessible?
+    !attr_accessible?
   end
   
   # Return true if a line has a problem model (no attr_accessible).
@@ -63,8 +64,8 @@ class String
   #   (2) The corresponding model doesn't define attr_accessible
   def mass_assignment_problem?
     c = File.open(self)
-    problem = c.find { |line| line.mass_assignment? and line.problem_model? }
-    not problem.nil?
+    problem = c.find { |line| line.mass_assignment? && line.problem_model? }
+    !problem.nil?
   end
 end
 
@@ -73,7 +74,7 @@ module MassAssignment
   def self.print_mass_assignment_problems(controller)
     lines = File.open(controller)
     lines.each_with_index do |line, number|
-      if line.mass_assignment? and line.problem_model?
+      if line.mass_assignment? && line.problem_model?
         puts "    #{number}  #{line}"
       end
     end
