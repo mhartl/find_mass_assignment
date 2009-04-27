@@ -27,6 +27,8 @@ but the User model *doesn't* define <tt>attr_accessible</tt>.  Then we get the o
 
 This indicates that the User model has a likely mass assignment vulnerability.
 
+In the case of no apparent vulnerabilities, the rake task simply returns nothing.
+
 # Unsafe attribute updates
 
 It is often useful to override <tt>attr\_accessible</tt>, especially at the console and in tests, so the plugin also adds an assortment of helper methods to Active Record:
