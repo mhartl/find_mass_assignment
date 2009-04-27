@@ -25,9 +25,17 @@ but the User model *doesn't* define <tt>attr_accessible</tt>.  Then we get the o
     /path/to/app/controllers/users_controller.rb
       17  @user = User.new(params[:user])
 
-This indicates that the User model has a likely mass assignment vulnerability.
+This indicates that the User model has a likely mass assignment vulnerability. In the case of no apparent vulnerabilities, the rake task simply returns nothing.
 
-In the case of no apparent vulnerabilities, the rake task simply returns nothing.
+The Unix exit status code of the rake task is 0 on success, 1 on failure, which means it can be used in a pre-commit hook. For example, if you use Git for version control, you can check for mass assignment vulnerabilities before each commit by putting
+
+<pre>rake find\_mass\_assignment</pre>
+
+at the end of the <tt>.git/hooks/pre-commit</tt> file.* Any commits that introduce potential mass assignment vulnerabilities (as determined by the plugin) will then fail automatically.
+
+*Be sure to make the pre-commit hook file executable if it isn't already:
+
+<pre>$ chmod +x .git/hooks/pre-commit</pre>
 
 # Unsafe attribute updates
 
@@ -40,9 +48,7 @@ It is often useful to override <tt>attr\_accessible</tt>, especially at the cons
 
 These work just like their safe counterparts, except they bypass attr\_accessible. For example, 
 
-<pre>
-Person.unsafe_new(:admin => true)
-</pre>
+<pre>Person.unsafe_new(:admin => true)</pre>
 
 works even if <tt>admin</tt> isn't attr\_accessible.
 

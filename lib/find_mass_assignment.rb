@@ -80,15 +80,22 @@ module MassAssignment
     end
   end
 
+  # Find and output mass assignment problems.
+  # Exit with non-zero status on error for use in pre-commit hooks.
+  # E.g., put 'rake find_mass_assignment' at the end of .git/hooks/pre-commit
+  # and then run
+  # $ chmod +x git/hooks/pre-commit
   def self.find
     controllers = Dir.glob("#{RAILS_ROOT}/app/controllers/**/*_controller.rb")
+    exit_status = 0
     controllers.each do |controller|
       if controller.mass_assignment_problem?
         puts "\n#{controller}"
         print_mass_assignment_problems(controller)
+        exit_status = 1
       end
     end
+  ensure
+    Process.exit exit_status
   end
 end
-
-
