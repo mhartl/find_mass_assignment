@@ -1,4 +1,4 @@
-# FindMassAssignment
+# Find Mass Assignment
 
 ## A Rails plugin to find likely mass assignment vulnerabilities
 
@@ -12,7 +12,7 @@ Install this plugin as follows:
 
 For more information, see my [brief review of mass assignment](http://blog.insoshi.com/2008/09/21/mass-assignment-in-rails-applications/) and my discussion of [how to fix mass assignment vulnerabilities in Rails](http://blog.insoshi.com/2008/09/21/finding-and-fixing-mass-assignment-problems-in-rails-applications/).
 
-# Example
+## Example
 
 Suppose line 17 of the Users controller is
 
@@ -26,6 +26,23 @@ but the User model *doesn't* define <tt>attr_accessible</tt>.  Then we get the o
       17  @user = User.new(params[:user])
 
 This indicates that the User model has a likely mass assignment vulnerability.
+
+# Unsafe attribute updates
+
+It is often useful to override <tt>attr\_accessible</tt>, especially at the console and in tests, so the plugin also adds an assortment of helper methods to Active Record:
+
+* unsafe\_new
+* unsafe\_build
+* unsafe\_create/unsafe\_create!
+* unsafe\_update\_attributes/unsafe\_update\_attributes!
+
+These work just like their safe counterparts, except they bypass attr\_accessible. For example, 
+
+<pre>
+Person.unsafe_new(:admin => true)
+</pre>
+
+works even if <tt>admin</tt> isn't attr\_accessible.
 
 # Copyright
 
