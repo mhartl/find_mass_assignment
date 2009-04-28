@@ -29,13 +29,15 @@ This indicates that the User model has a likely mass assignment vulnerability. I
 
 The Unix exit status code of the rake task is 0 on success, 1 on failure, which means it can be used in a pre-commit hook. For example, if you use Git for version control, you can check for mass assignment vulnerabilities before each commit by putting
 
-<pre>rake find\_mass\_assignment</pre>
+<pre>rake find_mass_assignment</pre>
 
 at the end of the <tt>.git/hooks/pre-commit</tt> file.* Any commits that introduce potential mass assignment vulnerabilities (as determined by the plugin) will then fail automatically.
 
 *Be sure to make the pre-commit hook file executable if it isn't already:
 
 <pre>$ chmod +x .git/hooks/pre-commit</pre>
+
+(You might also want to comment out the weird Perl script that's the default pre-commit hook on some systems; it gives you warnings like "You have some suspicious patch lines" that you probably don't want.)
 
 # Unsafe attribute updates
 
