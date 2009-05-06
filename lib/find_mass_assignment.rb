@@ -75,7 +75,7 @@ module MassAssignment
     lines = File.open(controller)
     lines.each_with_index do |line, number|
       if line.mass_assignment? && line.problem_model?
-        puts "    #{number}  #{line}"
+        puts "    #{number + 1}  #{line}"
       end
     end
   end
