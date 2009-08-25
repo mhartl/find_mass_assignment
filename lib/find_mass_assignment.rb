@@ -36,7 +36,7 @@ class String
   # Note that 'attr_accessible' must be preceded by nothing other than
   # whitespace; this catches cases where attr_accessible is commented out.
   def attr_accessible?
-    model = "#{RAILS_ROOT}/app/models/#{underscore}.rb"
+    model = "#{RAILS_ROOT}/app/models/#{self.underscore}.rb"
     if File.exist?(model)
       return @@cache[model] unless @@cache[model].nil?
       @@cache[model] = File.open(model).read =~ /^\s*attr_accessible/
