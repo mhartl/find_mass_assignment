@@ -55,7 +55,7 @@ class String
   # Return true if a line has a problem model (no attr_accessible).
   def problem_model?
     problem = mass_assignment_models.find { |model| model.problem? }
-    not problem.nil?
+    !problem.nil?
   end
   
   # Return true if a controller string has a (likely) mass assignment problem.
