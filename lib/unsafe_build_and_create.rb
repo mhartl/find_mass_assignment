@@ -35,7 +35,9 @@ class ActiveRecord::Base
     # Same as unsafe_create, but raises an exception on error
     # The analogy to create/create! is exact.
     def unsafe_create!(attrs)
-      unsafe_build(attrs).save!
+      record = unsafe_build(attrs)
+      record.save!
+      record
     end
   end
 
