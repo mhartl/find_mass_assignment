@@ -57,9 +57,17 @@ class ActiveRecord::Base
   end
 
   # Set attributes unsafely, bypassing attr_accessible.
+  # Note that we respect attr_protected attributes.
   def unsafe_attributes=(attrs)
     attrs.each do |k, v|
-      send("#{k}=", v)
+      send("#{k}=", v) unless protected?(k)
     end
   end
+  
+  private
+    
+    # Return true if the attribute is protected by attr_protected.
+    def protected?(attribute)
+      self.class.attr_protected.include?(attribute.to_s)
+    end
 end
