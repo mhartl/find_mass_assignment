@@ -58,8 +58,19 @@ class ActiveRecord::Base
 
   # Set attributes unsafely, bypassing attr_accessible.
   def unsafe_attributes=(attrs)
+    raise attr_accessible_error unless attr_accessible_defined?
     attrs.each do |k, v|
       send("#{k}=", v)
     end
   end
+  
+  private
+  
+    def attr_accessible_defined?
+       !self.class.accessible_attributes.nil?
+    end
+  
+    def attr_accessible_error
+      "#{self.class.name} is not protected by attr_accessible"
+    end
 end
