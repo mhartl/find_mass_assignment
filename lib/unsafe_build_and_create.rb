@@ -57,7 +57,6 @@ class ActiveRecord::Base
   end
 
   # Set attributes unsafely, bypassing attr_accessible.
-  # Note that we respect attr_protected attributes.
   def unsafe_attributes=(attrs)
     attrs.each do |k, v|
       send("#{k}=", v)
