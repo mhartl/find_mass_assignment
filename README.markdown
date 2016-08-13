@@ -8,7 +8,7 @@ The method is to scan the controllers for likely mass assignment, and then find 
 
 Install this plugin as follows:
 
-    $ script/plugin install git://github.com/mhartl/find_mass_assignment.git
+    $ rails plugin install git://github.com/mhartl/find_mass_assignment.git
 
 For more information, see my [brief review of mass assignment](http://blog.mhartl.com/2008/09/21/mass-assignment-in-rails-applications/) and my discussion of [how to fix mass assignment vulnerabilities in Rails](http://blog.mhartl.com/2008/09/21/finding-and-fixing-mass-assignment-problems-in-rails-applications/).
 

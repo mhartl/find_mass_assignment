@@ -36,7 +36,7 @@ class String
   # Note that 'attr_accessible' must be preceded by nothing other than
   # whitespace; this catches cases where attr_accessible is commented out.
   def attr_accessible?
-    model = "#{RAILS_ROOT}/app/models/#{self.underscore}.rb"
+    model = "#{Rails.root}/app/models/#{self.underscore}.rb"
     if File.exist?(model)
       return @@cache[model] unless @@cache[model].nil?
       @@cache[model] = File.open(model).read =~ /^\s*attr_accessible/
@@ -86,7 +86,7 @@ module MassAssignment
   # and then run
   # $ chmod +x git/hooks/pre-commit
   def self.find
-    controllers = Dir.glob("#{RAILS_ROOT}/app/controllers/**/*_controller.rb")
+    controllers = Dir.glob("#{Rails.root}/app/controllers/**/*_controller.rb")
     exit_status = 0
     controllers.each do |controller|
       if controller.mass_assignment_problem?
@@ -95,6 +95,9 @@ module MassAssignment
         exit_status = 1
       end
     end
+  rescue => e
+    puts e.message
+    puts e.backtrace.join("\n")
   ensure
     Process.exit exit_status
   end
